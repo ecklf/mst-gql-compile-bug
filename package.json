@@ -1,0 +1,29 @@
+{
+  "name": "mst-gql-compile-bug",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "impulse <ecklf@icloud.com>",
+  "license": "MIT",
+  "dependencies": {
+    "apollo-server-express": "^2.15.1",
+    "class-validator": "^0.12.2",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "graphql": "^15.3.0",
+    "reflect-metadata": "^0.1.13",
+    "type-graphql": "^1.0.0-rc.3"
+  },
+  "devDependencies": {
+    "concurrently": "^5.2.0",
+    "cross-env": "^7.0.2",
+    "typescript": "^3.9.6"
+  },
+  "scripts": {
+    "prepare": "yarn build-ts",
+    "build-ts": "tsc -p tsconfig.dev.json",
+    "watch-ts": "tsc -p tsconfig.dev.json -w",
+    "watch-node": "cross-env NODE_ENV=development nodemon dist/index.js",
+    "dev": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"cyan.bold,green.bold\" \"yarn watch-ts\" \"yarn watch-node\"",
+    "run:prod": "yarn build-ts && cross-env NODE_ENV=production && node dist/index.js"
+  }
+}
